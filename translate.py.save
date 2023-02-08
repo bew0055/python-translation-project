@@ -75,10 +75,7 @@ def get_reverse(sequence):
     >>> get_reverse('AUGC')
     'CGUA'
     """
-    reverse=sequence[::-1]
-    reverse=reverse.upper()
-    # sequence is denoted as the input and then the brackets would be the function of splicing (the -1 identifies the step and it being in reverse.
-    return reverse 
+    sequence=["
 
 def get_complement(sequence):
     """Get the complement of a `sequence` of nucleotides.
