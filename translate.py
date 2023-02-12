@@ -71,18 +71,21 @@ def get_all_translations(rna_sequence, genetic_code):
         `rna_sequence`.
     """
     protein=""
+    final=[]
     rna_sequence=rna_sequence.upper()
     start=rna_sequence.find('AUG')
     if start == -1:
         return []
     else:
-        for x in rna_sequence:
-            if [rna_sequence] == 'AUG':
-                for i in range(start,len(rna_sequence), 3):
-                    codon=rna_sequence[i:i+3]
-                    protein += genetic_code[codon]
-                    #value = protein.split('AUG')
-    return protein
+        for i in range(start,len(rna_sequence), 3):
+            codon=rna_sequence[i:i+3]
+            protein += genetic_code[codon]
+            value = protein.split('AUG')
+            if len(codon) < 3:
+                print("codon length is less than 3")
+                break
+            final.append(value)
+    return final
 
 
 def get_reverse(sequence):
@@ -171,8 +174,12 @@ def get_longest_peptide(rna_sequence, genetic_code):
         `rna_sequence`.
     """
     pass
-    # 
-
+    #For this trial, I think it will rely heavily on TestAllTranslations. However, instead of listing them all, the output will only keep the longest of the peptides. 
+    # To do so, I think it would follow adding something like this: def find_longest_word(word_list):  
+    #longest_word =  max(word_list, key=len)
+    #return longest_word 
+    # It would take the length of all of the translations and return the one with the longest length.
+    # For this to work, I need TestAllTranslations to work, and I am still currently stuck on that.
 if __name__ == '__main__':
     genetic_code = {'GUC': 'V', 'ACC': 'T', 'GUA': 'V', 'GUG': 'V', 'ACU': 'T', 'AAC': 'N', 'CCU': 'P', 'UGG': 'W', 'AGC': 'S', 'AUC': 'I', 'CAU': 'H', 'AAU': 'N', 'AGU': 'S', 'GUU': 'V', 'CAC': 'H', 'ACG': 'T', 'CCG': 'P', 'CCA': 'P', 'ACA': 'T', 'CCC': 'P', 'UGU': 'C', 'GGU': 'G', 'UCU': 'S', 'GCG': 'A', 'UGC': 'C', 'CAG': 'Q', 'GAU': 'D', 'UAU': 'Y', 'CGG': 'R', 'UCG': 'S', 'AGG': 'R', 'GGG': 'G', 'UCC': 'S', 'UCA': 'S', 'UAA': '*', 'GGA': 'G', 'UAC': 'Y', 'GAC': 'D', 'UAG': '*', 'AUA': 'I', 'GCA': 'A', 'CUU': 'L', 'GGC': 'G', 'AUG': 'M', 'CUG': 'L', 'GAG': 'E', 'CUC': 'L', 'AGA': 'R', 'CUA': 'L', 'GCC': 'A', 'AAA': 'K', 'AAG': 'K', 'CAA': 'Q', 'UUU': 'F', 'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'GCU': 'A', 'GAA': 'E', 'AUU': 'I', 'UUG': 'L', 'UUA': 'L', 'UGA': '*', 'UUC': 'F'}
     rna_seq = ("AUG"
