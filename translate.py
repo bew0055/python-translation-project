@@ -72,7 +72,6 @@ def get_all_translations(rna_sequence, genetic_code):
     """
     protein=""
     final=[]
-    kmer_size=3
     rna_sequence=rna_sequence.upper()
     start=rna_sequence.find('AUG')
     #sequences = rna_sequence.split('AUG')
@@ -81,7 +80,7 @@ def get_all_translations(rna_sequence, genetic_code):
     else:
         for i in range(start,len(rna_sequence), 3):
             codon=rna_sequence[i:i+3]
-            if len(codon) < kmer_size:
+            if len(codon) < 3:
                 break
             if codon == 'UAA' or codon == 'UGA' or codon == 'UAG':
                 break
