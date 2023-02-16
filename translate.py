@@ -72,23 +72,34 @@ def get_all_translations(rna_sequence, genetic_code):
     """
     protein=""
     final=[]
+    protein_list=[]
     rna_sequence=rna_sequence.upper()
     start=rna_sequence.find('AUG')
-    #sequences = rna_sequence.split('AUG')
     if start == -1:
         return []
     else:
-        for i in range(start,len(rna_sequence), 3):
-            codon=rna_sequence[i:i+3]
-            if len(codon) < 3:
-                break
-            if codon == 'UAA' or codon == 'UGA' or codon == 'UAG':
-                break
-            protein += genetic_code[codon]
-    value = protein.split('AUG')
-    final.extend(value)
-    return final
+        start_list= []
+        for x in range(0, len(rna_sequence),1):
+            codon_all=rna_sequence[x:x+3]
+            if codon_all == 'AUG':
+                start_list.append(x)
 
+        for a in start_list:
+            seq = rna_sequence[a:len(rna_sequence):1]
+            protein = translate_sequence(seq,genetic_code)
+        protein_list.append(protein)
+
+
+        #for i in range(start,len(rna_sequence), 3):
+            #codon=rna_sequence[i:i+3]
+            #if len(codon) < 3:
+                #break
+            #if codon == 'UAA' or codon == 'UGA' or codon == 'UAG':
+                #break
+            #protein += genetic_code[codon]
+    #value = protein.split('AUG')
+    #final.extend(value)
+    #return final
 
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
