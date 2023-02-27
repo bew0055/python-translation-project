@@ -35,6 +35,8 @@ def translate_sequence(rna_sequence, genetic_code):
     else:
         for i in range(0, len(rna_sequence), 3):
             codon=rna_sequence[i:i+3]
+            if len(codon) < 3:
+                break
             protein += genetic_code[codon]
             protein_no_stop=protein.split('*',1)[0]
     return protein_no_stop
@@ -83,11 +85,11 @@ def get_all_translations(rna_sequence, genetic_code):
             codon_all=rna_sequence[x:x+3]
             if codon_all == 'AUG':
                 start_list.append(x)
-
-        for a in start_list:
-            seq = rna_sequence[a:len(rna_sequence):1]
-            protein = translate_sequence(seq,genetic_code)
+    for a in start_list:
+        seq = rna_sequence[a:len(rna_sequence):1]
+        protein = translate_sequence(seq,genetic_code)
         protein_list.append(protein)
+    return protein_list
 
 
         #for i in range(start,len(rna_sequence), 3):
