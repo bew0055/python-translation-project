@@ -73,7 +73,6 @@ def get_all_translations(rna_sequence, genetic_code):
         `rna_sequence`.
     """
     protein=""
-    final=[]
     protein_list=[]
     rna_sequence=rna_sequence.upper()
     start=rna_sequence.find('AUG')
@@ -90,18 +89,6 @@ def get_all_translations(rna_sequence, genetic_code):
         protein = translate_sequence(seq,genetic_code)
         protein_list.append(protein)
     return protein_list
-
-
-        #for i in range(start,len(rna_sequence), 3):
-            #codon=rna_sequence[i:i+3]
-            #if len(codon) < 3:
-                #break
-            #if codon == 'UAA' or codon == 'UGA' or codon == 'UAG':
-                #break
-            #protein += genetic_code[codon]
-    #value = protein.split('AUG')
-    #final.extend(value)
-    #return final
 
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
@@ -188,7 +175,16 @@ def get_longest_peptide(rna_sequence, genetic_code):
         A string of the longest sequence of amino acids encoded by
         `rna_sequence`.
     """
-    pass
+    translations = get_all_translations(rna_sequence, genetic_code)    
+    if len(translations) < 1:
+        return ''
+    else:
+        longest_translation = max(translations, key=len)
+    return longest_translation
+
+
+
+
     #For this trial, I think it will rely heavily on TestAllTranslations. However, instead of listing them all, the output will only keep the longest of the peptides. 
     # To do so, I think it would follow adding something like this: def find_longest_word(word_list):  
     #longest_word =  max(word_list, key=len)
