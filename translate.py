@@ -175,6 +175,7 @@ def get_longest_peptide(rna_sequence, genetic_code):
         A string of the longest sequence of amino acids encoded by
         `rna_sequence`.
     """
+    ### the first attempt did not account for the reverse compliment, so I tried again
     #translations = get_all_translations(rna_sequence, genetic_code)    
     #if len(translations) < 1:
         #return ''
