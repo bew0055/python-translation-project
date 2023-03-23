@@ -175,14 +175,31 @@ def get_longest_peptide(rna_sequence, genetic_code):
         A string of the longest sequence of amino acids encoded by
         `rna_sequence`.
     """
-    translations = get_all_translations(rna_sequence, genetic_code)    
-    if len(translations) < 1:
+    #translations = get_all_translations(rna_sequence, genetic_code)    
+    #if len(translations) < 1:
+        #return ''
+    #else:
+        #longest_translation = max(translations, key=len)
+    #return longest_translation
+
+    rna_sequence = rna_sequence.upper()
+    rna_sequence = rna_sequence.strip()
+
+    rna_longest = get_all_translations(rna_sequence = rna_sequence, genetic_code= genetic_code)
+    rev_compliment = reverse_and_complement(sequence = rna_sequence)
+    rev_compliment_longest = get_all_translations(rna_sequence = rev_compliment, genetic_code=genetic_code)
+
+    rna_longest += rev_compliment_longest
+    if len(rna_longest) < 1:
         return ''
-    else:
-        longest_translation = max(translations, key=len)
-    return longest_translation
 
+    max_length = -1
+    for i in rna_longest:
+        if len(i) > max_length:
+            max_length = len(i)
+            longest = str(i)
 
+    return longest
 
 
     #For this trial, I think it will rely heavily on TestAllTranslations. However, instead of listing them all, the output will only keep the longest of the peptides. 
